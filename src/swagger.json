@@ -1,0 +1,247 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Documentação do Teste da Contele",
+        "description": "API que realiza operações referente a usuário",
+        "version": "1.0.0",
+        "contact": {
+            "email": "gp.psl55@gmail.com"
+        }
+    },
+    "paths": {
+        "/api/v1/users": {
+            "get": {
+                "tags": ["Listagem"],
+                "summary": "Listar todos usuários",
+                "description": "Retorna todos os usuários cadastrados",
+                "responses": {
+                    "200": {
+                        "description": "Lista de todos os usuários cadastrados",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "5"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "usuario1@email.com"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Criação"],
+                "summary": "Criar um novo usuário",
+                "description": "Realiza a criação de um novo usuário",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "senha": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "email": "user@email.com",
+                                    "senha": "uSer12345678"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Dados do usuário criado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "2"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "user@email.com"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Email ou Senha não informado na requisição"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Remoção"],
+                "summary": "Deletar todos usuários",
+                "description": "Realiza a remoção de todos os usuários cadastrados",
+                "responses": {
+                    "200": {
+                        "description": "Nenhuma resposta é retornada apenas o status de sucesso"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            }
+        },
+        "api/v1/users/:user_id": {
+            "get": {
+                "tags": ["Listagem"],
+                "summary": "Listar único usuário",
+                "description": "Retorna o usuário dono do ID passado na rota",
+                "responses": {
+                    "200": {
+                        "description": "Dados do usuário dono do ID",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "usuario@email.com"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "ID inválido"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Alteração"],
+                "summary": "Alterar usuário",
+                "description": "Realiza a alteração do usuário dono do ID passado",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "senha": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "email": "user@email.com",
+                                    "senha": "uSer12345678"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Retorna os dados do usuário atualizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "2"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "user@email.com"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Email ou Senha não informado na requisição"
+                    },
+                    "401": {
+                        "description": "ID inválido"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Remoção"],
+                "summary": "Deletar único usuário",
+                "description": "Realiza a remoção do usuário dono do ID passado na rota",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "senha": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "email": "user@email.com",
+                                    "senha": "uSer12345678"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Nenhuma resposta é retornada apenas o status de sucesso"
+                    },
+                    "401": {
+                        "description": "ID inválido"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            }
+        }
+    }
+}
